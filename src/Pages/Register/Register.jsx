@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
@@ -24,11 +24,6 @@ const Register = () => {
     const img = data.image[0];
     const formData = new FormData();
     formData.append("image", img);
-    const user = {
-      name,
-      email,
-      role,
-    };
 
     // upload image in imgbb
     const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_ImgBB_key}`;
@@ -39,6 +34,7 @@ const Register = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data?.success) {
+          const photo = data.data.url;
           //   create user
           createUser(email, password)
             .then((result) => {
@@ -47,11 +43,27 @@ const Register = () => {
               if (user?.uid) {
                 const profile = {
                   displayName: name,
-                  photoURL: data.data.url,
+                  photoURL: photo,
                 };
                 updateUser(profile)
                   .then((result) => {
-                    console.log(result);
+                    const user = {
+                      name,
+                      email,
+                      role,
+                      photo,
+                    };
+                    fetch("http://localhost:5000/adduser", {
+                      method: "POST",
+                      headers: {
+                        "content-type": "application/json",
+                      },
+                      body: JSON.stringify(user),
+                    })
+                      .then((res) => res.json())
+                      .then((data) => {
+                        console.log(data);
+                      });
                     navigate("/");
                   })
                   .catch((err) => console.log(err));
@@ -61,6 +73,12 @@ const Register = () => {
         }
       });
   };
+
+  // save user in database
+  // useEffect(() => {
+  //   console.log(user);
+
+  // }, [user]);
 
   return (
     <div className="flex items-center justify-center h-[80vh] ">
@@ -115,8 +133,8 @@ const Register = () => {
                 {...register("role")}
                 className="select select-bordered w-full max-w-xs"
               >
-                <option selected>User</option>
-                <option>Seller</option>
+                <option selected>user</option>
+                <option>seller</option>
               </select>
             </div>
             {/* password */}
