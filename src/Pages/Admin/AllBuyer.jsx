@@ -2,26 +2,19 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import ProfileCard from "../Shared/ProfileCard";
 
-const AllSeller = () => {
-  const {
-    data: allSeller = [],
-    refetch,
-    isLoading,
-  } = useQuery({
-    queryKey: ["allseller"],
+const AllBuyer = () => {
+  const { data: buyers = [], refetch } = useQuery({
+    queryKey: ["allbuyer"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/allseller");
+      const res = await fetch("http://localhost:5000/allbuyer");
       const data = await res.json();
       return data;
     },
   });
-  if (isLoading) {
-    return <div>loading</div>;
-  }
   return (
     <div>
       <div className="sticky top-0 bg-white">
-        <h2 className="text-2xl font-semibold mb-1">All Users</h2>
+        <h2 className="text-2xl font-semibold mb-1">All Buyer</h2>
         <hr />
         <label
           htmlFor="dashboard-drawer"
@@ -44,12 +37,12 @@ const AllSeller = () => {
         </label>
       </div>
       <div className="my-5 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {allSeller.map((seller) => (
-          <ProfileCard key={seller._id} userData={seller} refetch={refetch} />
+        {buyers.map((buyer) => (
+          <ProfileCard key={buyer._id} userData={buyer} refetch={refetch} />
         ))}
       </div>
     </div>
   );
 };
 
-export default AllSeller;
+export default AllBuyer;

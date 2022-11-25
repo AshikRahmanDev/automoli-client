@@ -1,4 +1,7 @@
+import { useState } from "react";
+
 const useVerify = (email) => {
+  const [isVerified, setIsVerified] = useState(false);
   if (email) {
     fetch(`http://localhost:5000/verify/?email=${email}`, {
       method: "PUT",
@@ -6,10 +9,11 @@ const useVerify = (email) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        return data;
+        if (data.modifiedCount > 0) {
+          setIsVerified(true);
+        }
       });
   }
-  const data = [];
-  return data;
+  return [isVerified];
 };
 export default useVerify;
