@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import { GiCarWheel } from "react-icons/gi";
 import { AiOutlineFileAdd, AiFillHome } from "react-icons/ai";
+import { RiRoadsterFill } from "react-icons/ri";
 
 const DashboardLayout = () => {
   return (
@@ -52,13 +53,13 @@ const DashboardLayout = () => {
             <li className="my-1 btn btn-ghost">
               <Link to={"/dashboard"}>
                 <AiOutlineFileAdd />
-                Add Product
+                post ad
               </Link>
             </li>
             <li className="my-1 btn btn-ghost">
-              <Link to={"/dashboard/addproduct"}>
-                <AiOutlineFileAdd />
-                Add Product
+              <Link to={"/dashboard/myads"}>
+                <RiRoadsterFill />
+                My Ads
               </Link>
             </li>
           </ul>

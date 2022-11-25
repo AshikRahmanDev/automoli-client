@@ -1,10 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const AddProduct = () => {
-  const [adDetails, setAddDetails] = useState(null);
   const { user } = useContext(AuthContext);
   const {
     register,
@@ -48,11 +46,19 @@ const AddProduct = () => {
             sellerName: user?.displayName,
             email: user?.email,
           };
-          setAddDetails(ad);
+          // save car ad in mongobd
+          fetch("http://localhost:5000/add-car-ad", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(ad),
+          })
+            .then((res) => res.json())
+            .then((data) => console.log(data));
         }
       });
   };
-  adDetails.model && console.log(adDetails);
   return (
     <div>
       <h3 className="text-2xl font-semibold mb-1">Fill in the details</h3>
@@ -117,8 +123,8 @@ const AddProduct = () => {
           </label>
           <input
             {...register("perchaseDate", { required: "Date is required" })}
-            type="date"
-            placeholder="$ 00"
+            type="number"
+            placeholder="2020"
             className="input input-bordered rounded-sm w-full max-w-xs"
           />
           {errors?.perchaseDate && (

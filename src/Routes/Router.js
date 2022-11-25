@@ -4,6 +4,7 @@ import Root from "../Layout/Root";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import AddProduct from "../Pages/Seller/AddProduct";
+import MyAds from "../Pages/Seller/MyAds";
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ export const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       { path: "/dashboard/", element: <AddProduct /> },
-      { path: "/dashboard/", element: <AddProduct /> },
+      { path: "/dashboard/myads", element: <MyAds /> },
     ],
   },
 ]);
