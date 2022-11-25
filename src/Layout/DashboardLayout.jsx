@@ -6,7 +6,7 @@ import { RiRoadsterFill } from "react-icons/ri";
 
 const DashboardLayout = () => {
   return (
-    <div>
+    <div className="relative">
       <div className="drawer drawer-mobile">
         <input
           id="dashboard-drawer"
@@ -14,25 +14,6 @@ const DashboardLayout = () => {
           className="drawer-toggle"
         />
         <div className="drawer-content flex flex-col p-3">
-          <label
-            htmlFor="dashboard-drawer"
-            className="btn btn-ghost drawer-button text-primary absolute top-1 right-1 lg:hidden"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16"
-              />
-            </svg>
-          </label>
           <Outlet />
         </div>
         <div className="drawer-side">
