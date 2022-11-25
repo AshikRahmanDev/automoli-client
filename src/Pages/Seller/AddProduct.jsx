@@ -12,7 +12,24 @@ const AddProduct = () => {
 
   // handle ad post
   const onPost = (data) => {
-    console.log(data);
+    const brand = data.brand;
+    const model = data.model;
+    const price = data.price;
+    const perchaseDate = data.perchaseDate;
+    const condition = data.condition;
+    const description = data.description;
+    const location = data.location;
+    const image = data.photo;
+    console.log(
+      brand,
+      model,
+      price,
+      perchaseDate,
+      condition,
+      description,
+      location,
+      image
+    );
   };
   return (
     <div>
