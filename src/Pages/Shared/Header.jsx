@@ -12,6 +12,14 @@ const Header = () => {
         <>
           <li>
             <Link
+              to={"/dashboard"}
+              className="btn btn-ghost rounded-lg text-primary mx-1"
+            >
+              Dashboard
+            </Link>
+          </li>
+          <li>
+            <Link
               onClick={() => logout()}
               className="btn btn-ghost rounded-lg text-primary mx-1"
             >
@@ -35,10 +43,13 @@ const Header = () => {
   );
   return (
     <div>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-accent">
         <div className="navbar-start">
           <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <label
+              tabIndex={0}
+              className="btn btn-ghost text-primary lg:hidden"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -63,21 +74,19 @@ const Header = () => {
           </div>
           <Link
             to={"/"}
-            className="btn flex items-center btn-ghost normal-case text-2xl"
+            className="btn flex items-center text-white btn-ghost normal-case text-2xl"
           >
             Aut <GiCarWheel className="w-[13px] mt-[5px] text-primary" /> m
             <GiCarWheel className="w-[13px] mt-[5px] text-primary" />
             li
           </Link>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal p-0"></ul>
+        <div className="navbar-center ml-auto hidden lg:flex">
+          <ul className="menu menu-horizontal p-0">{navOptions}</ul>
         </div>
-        <div className="navbar-end">
-          <ul className="menu menu-horizonta hidden lg:flex p-0">
-            {navOptions}
-          </ul>
-        </div>
+        {/* <div className="navbar-end hidden lg:flex">
+          <ul className="menu menu-horizonta  p-0">{navOptions}</ul>
+        </div> */}
       </div>
     </div>
   );
