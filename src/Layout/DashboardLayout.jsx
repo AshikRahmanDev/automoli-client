@@ -4,6 +4,7 @@ import { GiCarWheel } from "react-icons/gi";
 import { AiOutlineFileAdd, AiFillHome } from "react-icons/ai";
 import { MdSell } from "react-icons/md";
 import { RiRoadsterFill } from "react-icons/ri";
+import { BiUser } from "react-icons/bi";
 
 const DashboardLayout = () => {
   return (
@@ -54,6 +55,12 @@ const DashboardLayout = () => {
               <Link to={"/dashboard/allseller"}>
                 <MdSell />
                 All Seller
+              </Link>
+            </li>
+            <li className="my-1 btn btn-ghost">
+              <Link to={"/dashboard/allbuyer"}>
+                <BiUser />
+                All Buyer
               </Link>
             </li>
           </ul>

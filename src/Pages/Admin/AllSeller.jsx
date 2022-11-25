@@ -36,7 +36,7 @@ const AllSeller = () => {
           </svg>
         </label>
       </div>
-      <div className="my-5 grid md:grid-cols-3 gap-4">
+      <div className="my-5 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {allSeller.map((seller) => (
           <ProfileCard key={seller._id} seller={seller} refetch={refetch} />
         ))}
