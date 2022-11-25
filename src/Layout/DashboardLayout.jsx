@@ -34,7 +34,7 @@ const DashboardLayout = () => {
 
             <li className="my-1 btn btn-ghost">
               <Link to={"/"}>
-                <AiOutlineFileAdd />
+                <AiFillHome />
                 Home
               </Link>
             </li>

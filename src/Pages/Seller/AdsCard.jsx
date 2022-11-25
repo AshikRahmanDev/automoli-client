@@ -24,7 +24,7 @@ const adsCard = ({ ad }) => {
           Delete
         </button>
       </div>
-      <div className="ml-auto w-[40%]">
+      <div className="md:ml-auto md:w-[40%]">
         <p>
           Reach up to 10x more people by promoting your ad. your ad will show in
           advertise section.
