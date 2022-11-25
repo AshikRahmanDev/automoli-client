@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const AddProduct = () => {
+  const [adDetails, setAddDetails] = useState(null);
   const { user } = useContext(AuthContext);
   const {
     register,
@@ -19,18 +21,38 @@ const AddProduct = () => {
     const condition = data.condition;
     const description = data.description;
     const location = data.location;
+    const mobile = data.mobile;
     const image = data.photo;
-    console.log(
-      brand,
-      model,
-      price,
-      perchaseDate,
-      condition,
-      description,
-      location,
-      image
-    );
+    const formData = new FormData();
+    formData.append("image", image[0]);
+    // upload image in imgebb
+    const url = `https://api.imgbb.com/1/upload?&key=${process.env.REACT_APP_ImgBB_key}`;
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.success) {
+          const ad = {
+            brand,
+            model,
+            price,
+            perchaseDate,
+            condition,
+            description,
+            location,
+            mobile,
+            image: result.data.url,
+            sellerName: user?.displayName,
+            email: user?.email,
+          };
+          setAddDetails(ad);
+        }
+      });
   };
+  adDetails.model && console.log(adDetails);
   return (
     <div>
       <h3 className="text-2xl font-semibold mb-1">Fill in the details</h3>
