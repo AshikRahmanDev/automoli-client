@@ -1,23 +1,33 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
+import Loading from "../Shared/Loading";
 import AdsCard from "./AdsCard";
 
 const MyAds = () => {
   const { user } = useContext(AuthContext);
-  const { data: ads = [] } = useQuery({
+  const { data: ads = [], isLoading } = useQuery({
     queryKey: ["myads"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/myads/?email=${user?.email}`
+        `http://localhost:5000/myads/?email=${user?.email}`,
+        {
+          headers: {
+            authorization: localStorage.getItem("automoliToken"),
+          },
+        }
       );
       const data = await res.json();
       return data;
     },
   });
+
+  if (isLoading) {
+    return <Loading />;
+  }
   return (
     <div>
-      <div className="sticky top-0 bg-white">
+      <div className="sticky top-[-13px] bg-white">
         <h2 className="text-2xl font-semibold mb-1">
           Published ads {ads.length}
         </h2>
@@ -43,9 +53,7 @@ const MyAds = () => {
         </label>
       </div>
       <div className="w-[98%] my-5 grid grid-cols-1">
-        {ads.map((ad) => (
-          <AdsCard key={ad._id} ad={ad} />
-        ))}
+        {ads && ads.map((ad) => <AdsCard key={ad._id} ad={ad} />)}
       </div>
     </div>
   );

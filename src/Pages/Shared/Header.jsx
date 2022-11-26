@@ -20,7 +20,7 @@ const Header = () => {
           </li>
           <li>
             <Link
-              onClick={() => logout()}
+              onClick={() => logout(localStorage.removeItem("automoliToken"))}
               className="btn btn-ghost rounded-lg text-primary mx-1"
             >
               Logout

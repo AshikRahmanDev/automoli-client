@@ -2,15 +2,26 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
+import useToken from "../../Hooks/useToken";
 
 const Register = () => {
   const { createUser, updateUser } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm();
+  const [tokenEmail, setTokenEmail] = useState(null);
+  const [token] = useToken(tokenEmail);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  console.log(token);
+  if (token) {
+    setLoading(false);
+    navigate("/");
+  }
 
   //   handle form values
   const onSubmit = (data) => {
+    setLoading(true);
+    setLoading(true);
     const name = data.name;
     const email = data.email;
     const role = data.role;
@@ -64,8 +75,9 @@ const Register = () => {
                       .then((res) => res.json())
                       .then((data) => {
                         console.log(data);
+
+                        setTokenEmail(email);
                       });
-                    navigate("/");
                   })
                   .catch((err) => console.log(err));
               }
@@ -82,14 +94,17 @@ const Register = () => {
   // }, [user]);
 
   return (
-    <div className="flex items-center justify-center h-[80vh] ">
-      <div className="grid grid-cols-5 w-[65%] h-[75vh] mx-auto overflow-hidden shadow-2xl rounded-3xl">
+    <div className="flex items-center justify-center md:h-[90vh] ">
+      <div className="grid md:grid-cols-5 md:w-[65%] md:h-[75vh] mx-auto  shadow-2xl rounded-3xl">
         {/* form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="col-span-5 p-4">
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="col-span-1 md:col-span-5 p-4"
+        >
           <h4 className="text-center text-3xl font-bold">Register</h4>
           <div
             onSubmit={handleSubmit(onSubmit)}
-            className="grid grid-cols-2 gap-4 w-[70%] mx-auto mt-4"
+            className="grid md:grid-cols-2 gap-4 w-[70%] mx-auto mt-4"
           >
             <div className="form-control w-full">
               <label className="label py-1">
@@ -173,11 +188,13 @@ const Register = () => {
               Register
             </Link> */}
             <p className="text-red-500 text-center">{error}</p>
-            <input
-              type="submit"
-              className="btn btn-primary w-full text-white mt-2"
-              value="Register"
-            />
+            <div className="text-center">
+              <input
+                type="submit"
+                className="btn btn-primary w-[80%] text-white mt-2"
+                value={loading ? "loading" : "Register"}
+              />
+            </div>
             <p className="mt-1 text-center">
               Already have an Account?{" "}
               <Link to={"/login"} className="text-primary">

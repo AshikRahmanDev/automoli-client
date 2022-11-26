@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../Context/AuthProvider";
+import Loading from "../Shared/Loading";
 import ProfileCard from "../Shared/ProfileCard";
 
 const AllSeller = () => {
+  const { user } = useContext(AuthContext);
   const {
     data: allSeller = [],
     refetch,
@@ -10,13 +13,20 @@ const AllSeller = () => {
   } = useQuery({
     queryKey: ["allseller"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/allseller");
+      const res = await fetch(
+        `http://localhost:5000/allseller/?email=${user?.email}`,
+        {
+          headers: {
+            authorization: localStorage.getItem("automoliToken"),
+          },
+        }
+      );
       const data = await res.json();
       return data;
     },
   });
   if (isLoading) {
-    return <div>loading</div>;
+    return <Loading />;
   }
   return (
     <div>
@@ -44,9 +54,10 @@ const AllSeller = () => {
         </label>
       </div>
       <div className="my-5 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {allSeller.map((seller) => (
-          <ProfileCard key={seller._id} userData={seller} refetch={refetch} />
-        ))}
+        {allSeller &&
+          allSeller.map((seller) => (
+            <ProfileCard key={seller._id} userData={seller} refetch={refetch} />
+          ))}
       </div>
     </div>
   );

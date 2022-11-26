@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const AddProduct = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -55,7 +58,12 @@ const AddProduct = () => {
             body: JSON.stringify(ad),
           })
             .then((res) => res.json())
-            .then((data) => console.log(data));
+            .then((data) => {
+              if (data.acknowledged) {
+                toast.success("Ad Post Successful!");
+                navigate("/dashboard/myads");
+              }
+            });
         }
       });
   };
@@ -86,9 +94,9 @@ const AddProduct = () => {
       </div>
       <form
         onSubmit={handleSubmit(onPost)}
-        className="w-[80%] mx-auto grid grid-cols-2 gap-4 mt-5"
+        className="w-[80%] mx-auto grid md:grid-cols-2 gap-4 mt-5"
       >
-        <div className="form-control w-full max-w-xs">
+        <div className="form-control col-span-2 md:col-span-1 w-full max-w-xs">
           {/* brand */}
           <label className="label">
             <span className="label-text">Brand </span>
@@ -104,7 +112,7 @@ const AddProduct = () => {
           )}
         </div>
         {/* model */}
-        <div className="form-control w-full max-w-xs">
+        <div className="form-control col-span-2 md:col-span-1 w-full max-w-xs">
           <label className="label">
             <span className="label-text">Model </span>
           </label>
@@ -121,7 +129,7 @@ const AddProduct = () => {
           )}
         </div>
         {/* Price */}
-        <div className="form-control w-full max-w-xs">
+        <div className="form-control col-span-2 md:col-span-1 w-full max-w-xs">
           <label className="label">
             <span className="label-text">Price </span>
           </label>
@@ -138,7 +146,7 @@ const AddProduct = () => {
           )}
         </div>
         {/* year of purchase */}
-        <div className="form-control w-full max-w-xs">
+        <div className="form-control col-span-2 md:col-span-1 w-full max-w-xs">
           <label className="label">
             <span className="label-text">Year of purchase</span>
           </label>
@@ -153,7 +161,7 @@ const AddProduct = () => {
           )}
         </div>
         {/* select */}
-        <div className="form-control rounded-sm w-full max-w-xs">
+        <div className="form-control col-span-2 md:col-span-1 rounded-sm w-full max-w-xs">
           <label className="label">
             <span className="label-text">Condition</span>
           </label>
@@ -174,7 +182,7 @@ const AddProduct = () => {
           )}
         </div>
         {/* name */}
-        <div className="form-control w-full max-w-xs">
+        <div className="form-control col-span-2 md:col-span-1 w-full max-w-xs">
           <label className="label">
             <span className="label-text">Name </span>
           </label>
@@ -186,7 +194,7 @@ const AddProduct = () => {
           />
         </div>
         {/* email */}
-        <div className="form-control w-full max-w-xs">
+        <div className="form-control col-span-2 md:col-span-1 w-full max-w-xs">
           <label className="label">
             <span className="label-text">Email </span>
           </label>
@@ -198,7 +206,7 @@ const AddProduct = () => {
           />
         </div>
         {/* Mobile */}
-        <div className="form-control w-full max-w-xs">
+        <div className="form-control col-span-2 md:col-span-1 w-full max-w-xs">
           <label className="label">
             <span className="label-text">Mobile </span>
           </label>
@@ -213,12 +221,12 @@ const AddProduct = () => {
           )}
         </div>
         {/* description */}
-        <div className="form-control w-full max-w-xs">
+        <div className="form-control col-span-2 md:col-span-1 w-full max-w-xs">
           <label className="label">
             <span className="label-text">Details</span>
           </label>
           <textarea
-            className="border-2"
+            className="border-2 "
             {...register("description", {
               required: "Add a Short description!!",
             })}
@@ -230,7 +238,7 @@ const AddProduct = () => {
           )}
         </div>
         {/* location and image */}
-        <div className="grid grid-cols-1">
+        <div className="grid grid-cols-1 md:col-span-1 col-span-2">
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="label-text">Location </span>
@@ -268,6 +276,7 @@ const AddProduct = () => {
           </button>
         </div>
       </form>
+      <Toaster />
     </div>
   );
 };

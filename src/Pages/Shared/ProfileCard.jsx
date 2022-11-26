@@ -27,7 +27,7 @@ const ProfileCard = ({ userData, refetch }) => {
       </div>
       <div className="mx-2">
         <h4 className="text-lg font-semibold p-0 m-0">{name}</h4>
-        <p className="text-gray-500 p-0 m-0">{email}</p>
+        <p className="text-gray-500 text-[12px] p-0 m-0">{email}</p>
         {userData?.verified ? (
           <p className="text-green-600">
             <span className="capitalize text-black">{role}:</span> Verified

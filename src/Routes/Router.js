@@ -8,7 +8,9 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import AddProduct from "../Pages/Seller/AddProduct";
 import MyAds from "../Pages/Seller/MyAds";
+import AdminProtectedRoute from "./AdminProtectedRoute";
 import PrivetRoute from "./PrivetRoute";
+import SellerProtectedRoute from "./SellerProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -28,10 +30,38 @@ export const router = createBrowserRouter([
       </PrivetRoute>
     ),
     children: [
-      { path: "/dashboard/", element: <AddProduct /> },
-      { path: "/dashboard/myads", element: <MyAds /> },
-      { path: "/dashboard/allseller", element: <AllSeller /> },
-      { path: "/dashboard/allbuyer", element: <AllBuyer /> },
+      {
+        path: "/dashboard/",
+        element: (
+          <SellerProtectedRoute>
+            <AddProduct />
+          </SellerProtectedRoute>
+        ),
+      },
+      {
+        path: "/dashboard/myads",
+        element: (
+          <SellerProtectedRoute>
+            <MyAds />
+          </SellerProtectedRoute>
+        ),
+      },
+      {
+        path: "/dashboard/allseller",
+        element: (
+          <AdminProtectedRoute>
+            <AllSeller />
+          </AdminProtectedRoute>
+        ),
+      },
+      {
+        path: "/dashboard/allbuyer",
+        element: (
+          <AdminProtectedRoute>
+            <AllBuyer />
+          </AdminProtectedRoute>
+        ),
+      },
     ],
   },
 ]);

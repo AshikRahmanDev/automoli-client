@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { GiCarWheel } from "react-icons/gi";
 import { AiOutlineFileAdd, AiFillHome } from "react-icons/ai";
 import { MdSell } from "react-icons/md";
 import { RiRoadsterFill } from "react-icons/ri";
 import { BiUser } from "react-icons/bi";
+import useAdmin from "../Hooks/useAdmin";
+import { AuthContext } from "../Context/AuthProvider";
+import useSeller from "../Hooks/useSeller";
 
 const DashboardLayout = () => {
+  const { user } = useContext(AuthContext);
+  const [isAdmin] = useAdmin(user?.email);
+  const [isSeller] = useSeller(user?.email);
+  console.log(isSeller);
   return (
     <div className="relative">
       <div className="drawer drawer-mobile">
@@ -39,30 +46,38 @@ const DashboardLayout = () => {
                 Home
               </Link>
             </li>
-            <li className="my-1 btn btn-ghost">
-              <Link to={"/dashboard"}>
-                <AiOutlineFileAdd />
-                post ad
-              </Link>
-            </li>
-            <li className="my-1 btn btn-ghost">
-              <Link to={"/dashboard/myads"}>
-                <RiRoadsterFill />
-                My Ads
-              </Link>
-            </li>
-            <li className="my-1 btn btn-ghost">
-              <Link to={"/dashboard/allseller"}>
-                <MdSell />
-                All Seller
-              </Link>
-            </li>
-            <li className="my-1 btn btn-ghost">
-              <Link to={"/dashboard/allbuyer"}>
-                <BiUser />
-                All Buyer
-              </Link>
-            </li>
+            {isSeller && (
+              <>
+                <li className="my-1 btn btn-ghost">
+                  <Link to={"/dashboard"}>
+                    <AiOutlineFileAdd />
+                    post ad
+                  </Link>
+                </li>
+                <li className="my-1 btn btn-ghost">
+                  <Link to={"/dashboard/myads"}>
+                    <RiRoadsterFill />
+                    My Ads
+                  </Link>
+                </li>
+              </>
+            )}
+            {isAdmin && (
+              <>
+                <li className="my-1 btn btn-ghost">
+                  <Link to={"/dashboard/allseller"}>
+                    <MdSell />
+                    All Seller
+                  </Link>
+                </li>
+                <li className="my-1 btn btn-ghost">
+                  <Link to={"/dashboard/allbuyer"}>
+                    <BiUser />
+                    All Buyer
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
