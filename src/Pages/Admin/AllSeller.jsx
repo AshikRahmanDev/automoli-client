@@ -25,6 +25,7 @@ const AllSeller = () => {
       return data;
     },
   });
+  console.log(allSeller);
   if (isLoading) {
     return <Loading />;
   }

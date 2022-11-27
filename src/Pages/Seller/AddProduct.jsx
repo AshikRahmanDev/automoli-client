@@ -13,11 +13,20 @@ const AddProduct = () => {
     formState: { errors },
   } = useForm();
 
+  // get current time
+  const today = new Date();
+  let date =
+    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+  let time =
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
   // handle ad post
   const onPost = (data) => {
     const brand = data.brand;
     const model = data.model;
-    const price = data.price;
+    const orginalPrice = data.orginalPrice;
+    const resalePrice = data.resalePrice;
+    const kilomiterRun = data.kilomiterRun;
     const perchaseDate = data.perchaseDate;
     const condition = data.condition;
     const description = data.description;
@@ -39,7 +48,10 @@ const AddProduct = () => {
           const ad = {
             brand,
             model,
-            price,
+            orginalPrice,
+            resalePrice,
+            kilomiterRun,
+            post: time + " " + date,
             perchaseDate,
             condition,
             description,
@@ -128,21 +140,55 @@ const AddProduct = () => {
             <p className="text-red-500">{errors.model.message}</p>
           )}
         </div>
-        {/* Price */}
+        {/* Kilometers run */}
         <div className="form-control col-span-2 md:col-span-1 w-full max-w-xs">
           <label className="label">
-            <span className="label-text">Price </span>
+            <span className="label-text">Kilometers run (km)</span>
           </label>
           <input
             type="number"
-            {...register("price", {
+            {...register("kilomiterRun", {
+              required: "You must fill out this field.!",
+            })}
+            placeholder="What is the mileage of your car?"
+            className="input input-bordered rounded-sm w-full max-w-xs"
+          />
+          {errors?.kilomiterRun && (
+            <p className="text-red-500">{errors.kilomiterRun.message}</p>
+          )}
+        </div>
+        {/* orginal Price */}
+        <div className="form-control col-span-2 md:col-span-1 w-full max-w-xs">
+          <label className="label">
+            <span className="label-text">Orginal Price </span>
+          </label>
+          <input
+            type="number"
+            {...register("orginalPrice", {
               required: "ops! Your forget to add price",
             })}
             placeholder="$ 00"
             className="input input-bordered rounded-sm w-full max-w-xs"
           />
-          {errors?.price && (
-            <p className="text-red-500">{errors.price.message}</p>
+          {errors?.orginalPrice && (
+            <p className="text-red-500">{errors.orginalPrice.message}</p>
+          )}
+        </div>
+        {/* resale Price */}
+        <div className="form-control col-span-2 md:col-span-1 w-full max-w-xs">
+          <label className="label">
+            <span className="label-text">Resale Price </span>
+          </label>
+          <input
+            type="number"
+            {...register("resalePrice", {
+              required: "ops! Your forget to add price",
+            })}
+            placeholder="$ 00"
+            className="input input-bordered rounded-sm w-full max-w-xs"
+          />
+          {errors?.resalePrice && (
+            <p className="text-red-500">{errors.resalePrice.message}</p>
           )}
         </div>
         {/* year of purchase */}

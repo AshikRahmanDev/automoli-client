@@ -2,7 +2,7 @@ import React from "react";
 
 const Banner = () => {
   return (
-    <div className="flex flex-col-reverse md:flex-row w-[95%] md:h-[80vh] items-center mx-auto bg-accent/20  mt-6">
+    <div className="flex flex-col-reverse md:flex-row w-[95%] md:h-[80vh] items-center mx-auto bg-accent/20  my-6">
       <div className="md:ml-10 p-5 md:p-0">
         <h4 className="text-lg font-semibold text-primary">
           Best Used Car Selling Platfrom

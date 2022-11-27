@@ -1,7 +1,15 @@
 import React from "react";
 
 const adsCard = ({ ad }) => {
-  const { brand, condition, image, model, perchaseDate, price, location } = ad;
+  const {
+    brand,
+    condition,
+    image,
+    model,
+    perchaseDate,
+    resalePrice,
+    location,
+  } = ad;
   console.log(ad);
   return (
     <div className="border my-5 p-2 md:flex">
@@ -15,7 +23,7 @@ const adsCard = ({ ad }) => {
           {model} {`(${condition})`}
         </h4>
         <p className="text-gray-600">{location}</p>
-        <p>TK {price}</p>
+        <p>TK {resalePrice}</p>
         <p>
           {brand} | {perchaseDate}
         </p>
