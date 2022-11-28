@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const BrandCard = ({ category }) => {
   const { picture, brand } = category;
-  console.log(category);
 
   return (
     <Link to={`/brand/cars/${brand}`}>

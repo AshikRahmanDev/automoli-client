@@ -113,12 +113,17 @@ const AddProduct = () => {
           <label className="label">
             <span className="label-text">Brand </span>
           </label>
-          <input
-            {...register("brand", { required: "Brand is required" })}
-            type="text"
-            placeholder="Brand"
-            className="input input-bordered rounded-sm w-full max-w-xs"
-          />
+          <select
+            {...register("brand", {
+              required: "You can't skip this required field!",
+            })}
+            className="select select-bordered rounded-sm"
+          >
+            <option selected>1. Honda</option>
+            <option>2. Toyota</option>
+            <option>3. Nisshan</option>
+            <option>4. Other</option>
+          </select>
           {errors?.brand && (
             <p className="text-red-500">{errors.brand.message}</p>
           )}
