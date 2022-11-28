@@ -6,6 +6,7 @@ import AllSeller from "../Pages/Admin/AllSeller";
 import Cars from "../Pages/Cars/Cars";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
+import MyBooking from "../Pages/My Booking/MyBooking";
 import Register from "../Pages/Register/Register";
 import AddProduct from "../Pages/Seller/AddProduct";
 import MyAds from "../Pages/Seller/MyAds";
@@ -41,8 +42,9 @@ export const router = createBrowserRouter([
       </PrivetRoute>
     ),
     children: [
+      { path: "/dashboard/", element: <MyBooking /> },
       {
-        path: "/dashboard/",
+        path: "/dashboard/addpost",
         element: (
           <SellerProtectedRoute>
             <AddProduct />

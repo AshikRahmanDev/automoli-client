@@ -46,10 +46,16 @@ const DashboardLayout = () => {
                 Home
               </Link>
             </li>
+            <li className="my-1 btn btn-ghost">
+              <Link to={"/dashboard/"}>
+                <AiFillHome />
+                My booling
+              </Link>
+            </li>
             {isSeller && (
               <>
                 <li className="my-1 btn btn-ghost">
-                  <Link to={"/dashboard"}>
+                  <Link to={"/dashboard/addpost"}>
                     <AiOutlineFileAdd />
                     post ad
                   </Link>

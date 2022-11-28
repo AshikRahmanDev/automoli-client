@@ -5,7 +5,8 @@ import BookNowModal from "./BookNowModal";
 import CarCard from "./CarCard";
 
 const Cars = () => {
-  const [isveified, setIsverified] = useState(false);
+  const [bookItem, setBookItem] = useState("");
+  const [isveified, setIsverified] = useState("");
   const { user } = useContext(AuthContext);
   const cars = useLoaderData();
 
@@ -28,10 +29,17 @@ const Cars = () => {
       <div className="my-3 grid grid-cols-1 gap-4">
         {cars &&
           cars.map((car) => (
-            <CarCard key={car._id} car={car} isveified={isveified} />
+            <CarCard
+              key={car._id}
+              car={car}
+              isveified={isveified}
+              setBookItem={setBookItem}
+            />
           ))}
       </div>
-      <BookNowModal />
+      {bookItem && (
+        <BookNowModal setBookItem={setBookItem} bookItem={bookItem} />
+      )}
     </div>
   );
 };
