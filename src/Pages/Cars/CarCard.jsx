@@ -2,7 +2,6 @@ import React from "react";
 import { MdVerifiedUser } from "react-icons/md";
 
 const CarCard = ({ car, isveified }) => {
-  console.log(isveified);
   const {
     brand,
     condition,
@@ -52,6 +51,12 @@ const CarCard = ({ car, isveified }) => {
         <p>
           Resale Price: <span className="text-green-500">{resalePrice}</span>
         </p>
+        <label
+          htmlFor="my-modal"
+          className="btn btn-success text-white my-2 btn-sm"
+        >
+          book now
+        </label>
       </div>
     </div>
   );

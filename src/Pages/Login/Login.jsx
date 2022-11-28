@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { GiCarWheel } from "react-icons/gi";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
 import useToken from "../../Hooks/useToken";
@@ -13,16 +13,18 @@ const Login = () => {
   const [tokenEmail, setTokenEmail] = useState("");
   const { login, googleLogin } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const from = location?.state?.from?.pathname || "/";
 
   const [token] = useToken(tokenEmail);
   if (token) {
-    navigate("/");
   }
 
   // handle form values and login
   const onSubmit = (data) => {
-    setLoading("");
+    setLoading(true);
     const email = data.email;
     const password = data.password;
     login(email, password)
@@ -32,6 +34,7 @@ const Login = () => {
         setLoading(false);
         setTokenEmail(email);
         toast.success("login Successful!");
+        navigate(from, { replace: true });
       })
       .catch((err) => setError(err.message));
   };
@@ -39,8 +42,8 @@ const Login = () => {
   // handle google login
   const handleGoogleLogin = () => {
     googleLogin().then((result) => {
-      console.log(result);
       const userData = result.user;
+
       const user = {
         name: userData.displayName,
         email: userData.email,
@@ -60,6 +63,7 @@ const Login = () => {
             console.log(data);
             toast.success("login Successful!");
             setTokenEmail(userData.email);
+            navigate(from, { replace: true });
           });
       }
     });

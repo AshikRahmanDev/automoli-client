@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
+import BookNowModal from "./BookNowModal";
 import CarCard from "./CarCard";
 
 const Cars = () => {
@@ -16,7 +17,7 @@ const Cars = () => {
           setIsverified(data.verified);
         }
       });
-  }, [cars]);
+  }, [user?.email]);
 
   return (
     <div className="w-[95%] mx-auto my-5 p-4">
@@ -30,6 +31,7 @@ const Cars = () => {
             <CarCard key={car._id} car={car} isveified={isveified} />
           ))}
       </div>
+      <BookNowModal />
     </div>
   );
 };

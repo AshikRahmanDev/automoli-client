@@ -25,7 +25,11 @@ export const router = createBrowserRouter([
         path: "/brand/cars/:brandName",
         loader: ({ params }) =>
           fetch(`http://localhost:5000/brand/cars/${params.brandName}`),
-        element: <Cars />,
+        element: (
+          <PrivetRoute>
+            <Cars />
+          </PrivetRoute>
+        ),
       },
     ],
   },
