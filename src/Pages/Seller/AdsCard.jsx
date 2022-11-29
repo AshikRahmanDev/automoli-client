@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../Context/AuthProvider";
 
-const adsCard = ({ ad }) => {
+const AdsCard = ({ ad, refetch }) => {
+  const { user } = useContext(AuthContext);
   const {
     brand,
     condition,
@@ -10,7 +12,28 @@ const adsCard = ({ ad }) => {
     resalePrice,
     location,
   } = ad;
-  console.log(ad);
+  const handleDelte = (ad) => {
+    const conformation = window.confirm(
+      `You are going to delete your ${ad.model} ads`
+    );
+    if (conformation) {
+      console.log(ad);
+      // delete seller add
+      fetch(`http://localhost:5000/ad/delete/?email=${user?.email}`, {
+        method: "DELETE",
+        headers: {
+          authorization: localStorage.getItem("automoliToken"),
+          productId: ad._id,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.acknowledged) {
+            refetch();
+          }
+        });
+    }
+  };
   return (
     <div className="border my-5 p-2 md:flex">
       <img
@@ -28,7 +51,10 @@ const adsCard = ({ ad }) => {
           {brand} | {perchaseDate}
         </p>
         <p className="text-red-500">Usold</p>
-        <button className="border p-2 bg-slate-400/30 rounded-lg hover:btn-error mt-2 ">
+        <button
+          onClick={() => handleDelte(ad)}
+          className="border btn btn-sm btn-error text-white mt-2 "
+        >
           Delete
         </button>
       </div>
@@ -47,4 +73,4 @@ const adsCard = ({ ad }) => {
   );
 };
 
-export default adsCard;
+export default AdsCard;

@@ -11,7 +11,7 @@ const PrivetRoute = ({ children }) => {
     return <Loading />;
   }
 
-  if (user?.uid) {
+  if (user?.email) {
     return children;
   }
 

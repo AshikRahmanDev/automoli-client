@@ -5,11 +5,7 @@ import { AuthContext } from "../../Context/AuthProvider";
 
 const BookNowModal = ({ setBookItem, bookItem }) => {
   const { user } = useContext(AuthContext);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   const { model, image, location, resalePrice } = bookItem;
   const brand = bookItem.brand.split(" ")[1];
 

@@ -6,7 +6,11 @@ import AdsCard from "./AdsCard";
 
 const MyAds = () => {
   const { user } = useContext(AuthContext);
-  const { data: ads = [], isLoading } = useQuery({
+  const {
+    data: ads = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["myads"],
     queryFn: async () => {
       const res = await fetch(
@@ -53,7 +57,8 @@ const MyAds = () => {
         </label>
       </div>
       <div className="w-[98%] my-5 grid grid-cols-1">
-        {ads && ads.map((ad) => <AdsCard key={ad._id} ad={ad} />)}
+        {ads &&
+          ads.map((ad) => <AdsCard key={ad._id} ad={ad} refetch={refetch} />)}
       </div>
     </div>
   );

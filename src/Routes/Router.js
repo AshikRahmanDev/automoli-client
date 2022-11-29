@@ -10,6 +10,7 @@ import MyBooking from "../Pages/My Booking/MyBooking";
 import Register from "../Pages/Register/Register";
 import AddProduct from "../Pages/Seller/AddProduct";
 import MyAds from "../Pages/Seller/MyAds";
+import ErrorPage from "../Pages/Shared/ErrorPage";
 import AdminProtectedRoute from "./AdminProtectedRoute";
 import PrivetRoute from "./PrivetRoute";
 import SellerProtectedRoute from "./SellerProtectedRoute";
@@ -77,4 +78,5 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  { path: "*", element: <ErrorPage /> },
 ]);

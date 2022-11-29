@@ -12,7 +12,6 @@ const Register = () => {
   const [token] = useToken(tokenEmail);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  console.log(token);
   if (token) {
     setLoading(false);
     navigate("/");

@@ -5,7 +5,7 @@ import useAdmin from "../Hooks/useAdmin";
 import Loading from "../Pages/Shared/Loading";
 
 const AdminProtectedRoute = ({ children }) => {
-  const { user, logout, loading } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const [isAdmin, isAdminLoading] = useAdmin(user?.email);
   if (loading || isAdminLoading) {
     return <Loading></Loading>;
@@ -16,7 +16,6 @@ const AdminProtectedRoute = ({ children }) => {
 
   return (
     <>
-      {logout()}
       <Navigate to="/login" />
     </>
   );
