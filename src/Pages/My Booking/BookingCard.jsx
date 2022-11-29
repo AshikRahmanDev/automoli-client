@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const BookingCard = ({ booking }) => {
   const { product } = booking;
@@ -7,7 +8,6 @@ const BookingCard = ({ booking }) => {
     perchaseDate,
     resalePrice,
     brand,
-    condition,
     kilomiterRun,
     location,
     model,
@@ -28,7 +28,20 @@ const BookingCard = ({ booking }) => {
         <p className="text-md text-primary font-semibold">
           Price: {resalePrice} TK
         </p>
-        <button className="btn btn-sm btn-primary my-2 text-white"> Pay</button>
+        {product.resalePrice && !product.paid && (
+          <Link
+            to={`/dashboard/payment/${booking._id}`}
+            className="btn btn-sm btn-primary my-2 text-white"
+          >
+            {" "}
+            Pay
+          </Link>
+        )}
+        {product.resalePrice && product.paid && (
+          <button className="btn btn-sm btn-disabled my-2 text-white">
+            Paid
+          </button>
+        )}
       </div>
     </div>
   );

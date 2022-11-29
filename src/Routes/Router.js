@@ -7,6 +7,7 @@ import Cars from "../Pages/Cars/Cars";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import MyBooking from "../Pages/My Booking/MyBooking";
+import Payment from "../Pages/Payment/Payment";
 import Register from "../Pages/Register/Register";
 import AddProduct from "../Pages/Seller/AddProduct";
 import MyAds from "../Pages/Seller/MyAds";
@@ -75,6 +76,12 @@ export const router = createBrowserRouter([
             <AllBuyer />
           </AdminProtectedRoute>
         ),
+      },
+      {
+        path: "/dashboard/payment/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/bookings/${params.id}`),
+        element: <Payment />,
       },
     ],
   },
