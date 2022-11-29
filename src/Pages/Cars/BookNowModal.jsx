@@ -10,16 +10,13 @@ const BookNowModal = ({ setBookItem, bookItem }) => {
   const brand = bookItem.brand.split(" ")[1];
 
   const onSubmit = (data) => {
-    console.log(data);
     const booking = {
-      buyer: {
-        contact: data,
-        buyerEmail: user?.email,
-        buyerName: user?.displayName,
-      },
+      contact: data,
+      buyerName: user?.displayName,
+      buyerEmail: user?.email,
       product: bookItem,
     };
-    if (booking) {
+    if (data.buyerMobile || data.buyerLocation) {
       fetch("http://localhost:5000/addbooking", {
         method: "POST",
         headers: {
@@ -30,6 +27,7 @@ const BookNowModal = ({ setBookItem, bookItem }) => {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           if (data.acknowledged) {
             setBookItem("");
             toast.success("Booking Successfull");
@@ -40,7 +38,6 @@ const BookNowModal = ({ setBookItem, bookItem }) => {
 
   return (
     <div>
-      {/* Put this part before </body> tag */}
       <input type="checkbox" id="my-modal" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box">
@@ -53,10 +50,7 @@ const BookNowModal = ({ setBookItem, bookItem }) => {
               <p className="text-[12px]">{location}</p>
             </div>
           </div>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="py-4 grid md:grid-cols-2 gap-4"
-          >
+          <form className="py-4 grid md:grid-cols-2 gap-4">
             <div className="form-control w-full ">
               <label className="label">
                 <span className="label-text">Model</span>
@@ -139,8 +133,8 @@ const BookNowModal = ({ setBookItem, bookItem }) => {
               </button>
 
               <input
+                onClick={handleSubmit(onSubmit)}
                 className="btn btn-primary text-white"
-                htmlFor="my-modal"
                 type="submit"
                 value="Book Now"
               />

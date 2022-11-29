@@ -1,6 +1,32 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useContext } from "react";
+import { AuthContext } from "../../Context/AuthProvider";
+import Loading from "../Shared/Loading";
+import NotAvailable from "../Shared/NotAvailable";
+import BookingCard from "./BookingCard";
 
 const MyBooking = () => {
+  const { user } = useContext(AuthContext);
+
+  const { data: mybooking = [], isLoading } = useQuery({
+    queryKey: ["mybooking"],
+    queryFn: async () => {
+      const res = await fetch(
+        `http://localhost:5000/mybooking?email=${user?.email}`,
+        {
+          headers: {
+            authorization: localStorage.getItem("automoliToken"),
+          },
+        }
+      );
+      const data = await res.json();
+      return data;
+    },
+  });
+  if (isLoading) {
+    return <Loading />;
+  }
+  console.log(mybooking);
   return (
     <div>
       <div className="sticky top-[-13px] bg-white">
@@ -26,6 +52,15 @@ const MyBooking = () => {
           </svg>
         </label>
       </div>
+      {mybooking.length === 0 ? (
+        <NotAvailable />
+      ) : (
+        <div className="grid grid-cols-1 gap-5 w-[70%] mx-auto my-5 rounded-sm ">
+          {mybooking.map((booking) => (
+            <BookingCard key={booking._id} booking={booking} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

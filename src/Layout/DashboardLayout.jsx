@@ -48,7 +48,7 @@ const DashboardLayout = () => {
             <li className="my-1 btn btn-ghost">
               <Link to={"/dashboard/"}>
                 <AiFillHome />
-                My booling
+                My booking
               </Link>
             </li>
             {isSeller && (
