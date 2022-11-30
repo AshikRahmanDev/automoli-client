@@ -1,8 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const AdsCard = ({ ad, refetch }) => {
   const { user } = useContext(AuthContext);
+  const [avertiseId, setAvertiseId] = useState("");
+
   const {
     brand,
     condition,
@@ -11,13 +14,19 @@ const AdsCard = ({ ad, refetch }) => {
     perchaseDate,
     resalePrice,
     location,
+    _id,
   } = ad;
+  fetch(`http://localhost:5000/avertise/${_id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      setAvertiseId(data.itemId);
+    });
   const handleDelte = (ad) => {
     const conformation = window.confirm(
       `You are going to delete your ${ad.model} ads`
     );
     if (conformation) {
-      console.log(ad);
       // delete seller add
       fetch(`http://localhost:5000/ad/delete/?email=${user?.email}`, {
         method: "DELETE",
@@ -30,6 +39,58 @@ const AdsCard = ({ ad, refetch }) => {
         .then((data) => {
           if (data.acknowledged) {
             refetch();
+          }
+        });
+    }
+  };
+
+  const handleAdveritse = (item) => {
+    const {
+      brand,
+      condition,
+      image,
+      model,
+      perchaseDate,
+      resalePrice,
+      location,
+      _id,
+    } = item;
+    const advertise = {
+      brand,
+      condition,
+      image,
+      model,
+      perchaseDate,
+      resalePrice,
+      location,
+      itemId: _id,
+    };
+    fetch(`http://localhost:5000/avertise/${_id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setAvertiseId(data.itemId);
+      });
+
+    if (advertise) {
+      fetch("http://localhost:5000/advertise", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: localStorage.getItem("automoliToken"),
+        },
+        body: JSON.stringify(advertise),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.acknowledged) {
+            toast.success("Successfully advertise!");
+            fetch(`http://localhost:5000/avertise/${_id}`)
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+                setAvertiseId(data.itemId);
+              });
           }
         });
     }
@@ -64,9 +125,14 @@ const AdsCard = ({ ad, refetch }) => {
           advertise section.
         </p>
         <div className="text-center ">
-          <button className="btn btn-primary btn-wide text-white my-2">
-            Advertise
-          </button>
+          {avertiseId !== _id && (
+            <button
+              onClick={() => handleAdveritse(ad)}
+              className="btn btn-primary btn-wide text-white my-2"
+            >
+              Advertise
+            </button>
+          )}
         </div>
       </div>
     </div>

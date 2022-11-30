@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import Loading from "../Shared/Loading";
+import NotAvailable from "../Shared/NotAvailable";
 import ProfileCard from "../Shared/ProfileCard";
 
 const AllSeller = () => {
@@ -54,6 +55,14 @@ const AllSeller = () => {
           </svg>
         </label>
       </div>
+      {allSeller.length === 0 && (
+        <NotAvailable>
+          <p className="text-white text-4xl">
+            No <span className="text-primary font-semibold">buyer</span>{" "}
+            available
+          </p>
+        </NotAvailable>
+      )}
       <div className="my-5 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
         {allSeller &&
           allSeller.map((seller) => (

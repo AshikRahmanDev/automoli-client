@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Context/AuthProvider";
 import useToken from "../../Hooks/useToken";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const { createUser, updateUser } = useContext(AuthContext);
@@ -14,6 +15,7 @@ const Register = () => {
   const navigate = useNavigate();
   if (token) {
     setLoading(false);
+    toast.success("Register Successsfull!!");
     navigate("/");
   }
 

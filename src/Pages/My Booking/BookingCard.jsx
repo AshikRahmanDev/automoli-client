@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 const BookingCard = ({ booking }) => {
   const { product } = booking;
-  console.log(product);
   const {
     perchaseDate,
     resalePrice,

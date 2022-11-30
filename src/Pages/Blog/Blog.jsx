@@ -4,7 +4,7 @@ const Blog = () => {
   return (
     <div className="w-[90%] mx-auto bg-accent/10 p-2 my-5 ">
       <div className="flex  items-center justify-between h-[84vh]  ">
-        <div className="w-[40%] mx-auto">
+        <div className="md:w-[40%] mx-auto">
           {/* Question  */}
           <div
             tabIndex={0}
@@ -81,7 +81,7 @@ const Blog = () => {
         </div>
         <div>
           <img
-            className="w-[600px]"
+            className="w-[600px] hidden md:flex"
             src="https://i.ibb.co/MpFHrX2/pngwing-com.png"
             alt=""
           />

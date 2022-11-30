@@ -1,5 +1,6 @@
 import React from "react";
 import Achievement from "../Achievement/Achievement";
+import Advertise from "../AdvertiseItem/Advertise";
 import Banner from "../Banner/Banner";
 import Categories from "../Category/Categories";
 
@@ -8,6 +9,7 @@ const Home = () => {
     <div>
       <Banner />
       <Categories />
+      <Advertise />
       <Achievement />
     </div>
   );

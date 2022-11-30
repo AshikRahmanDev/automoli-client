@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import toast from "react-hot-toast";
 import { MdVerifiedUser } from "react-icons/md";
 import useDelete from "../../Hooks/useDelete";
 import useVerify from "../../Hooks/useVerify";
@@ -12,11 +11,9 @@ const ProfileCard = ({ userData, refetch }) => {
   const [isDelete] = useDelete(userDeleteEmail);
 
   if (idVerified) {
-    toast.success("user verify Successfull!");
     refetch();
   }
   if (isDelete) {
-    toast.success("user Delete Successfull!");
     refetch();
   }
 

@@ -122,7 +122,7 @@ const AddProduct = () => {
           >
             <option selected>1. Honda</option>
             <option>2. Toyota</option>
-            <option>3. Nisshan</option>
+            <option>3. Nissan</option>
             <option>4. Other</option>
           </select>
           {errors?.brand && (

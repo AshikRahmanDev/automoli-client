@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../Context/AuthProvider";
 
 const Banner = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="flex flex-col-reverse md:flex-row w-[95%] md:h-[80vh] items-center mx-auto bg-accent/20  my-6">
       <div className="md:ml-10 p-5 md:p-0">
@@ -17,11 +19,13 @@ const Banner = () => {
           condition. <br className="md:block hidden" /> 24 coustomer service.
         </p>
         <div className="mt-3">
+          {!user?.email && (
+            <button className="btn btn-outline mx-3 rounded-sm btn-primary text-white">
+              Register
+            </button>
+          )}
           <button className="btn btn-primary mr-3 rounded-sm text-white">
-            Register
-          </button>
-          <button className="btn btn-outline mx-3 rounded-sm btn-primary text-white">
-            Register
+            blogs
           </button>
         </div>
       </div>
