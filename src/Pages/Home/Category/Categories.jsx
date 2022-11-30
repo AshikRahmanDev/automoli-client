@@ -18,7 +18,7 @@ const Categories = () => {
   }, []);
 
   return (
-    <div className="w-[95%] mx-auto bg-accent/20 p-3 mb-5">
+    <div className="w-[95%] mx-auto bg-accent/10 p-3 mb-5">
       <h2 className="text-2xl font-bold">Find your car</h2>
       <div className="my-5 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {categories &&

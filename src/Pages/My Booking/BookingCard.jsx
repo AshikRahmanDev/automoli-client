@@ -15,11 +15,11 @@ const BookingCard = ({ booking }) => {
   } = product;
 
   return (
-    <div className="bg-accent/5 p-3 flex">
+    <div className="bg-accent/5 p-3 md:flex">
       <div className="">
         <img className="w-[200px]" src={image} alt="" />
       </div>
-      <div className="px-4">
+      <div className="md:px-4">
         <h3 className="text-xl font-semibold">
           {model} {brand.split(" ")[1]} {perchaseDate}
         </h3>

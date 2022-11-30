@@ -53,7 +53,11 @@ const MyBooking = () => {
         </label>
       </div>
       {mybooking.length === 0 ? (
-        <NotAvailable />
+        <NotAvailable>
+          <h1 className="text-white font-semibold text-5xl">
+            You haven't <span className="text-primary">book</span> any.
+          </h1>
+        </NotAvailable>
       ) : (
         <div className="grid grid-cols-1 gap-5 w-[70%] mx-auto my-5 rounded-sm ">
           {mybooking.map((booking) => (

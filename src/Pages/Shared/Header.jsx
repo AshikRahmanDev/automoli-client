@@ -8,6 +8,14 @@ const Header = () => {
 
   const navOptions = (
     <>
+      <li>
+        <Link
+          to={"/blog"}
+          className="btn btn-ghost rounded-lg text-primary mx-1"
+        >
+          Blog
+        </Link>
+      </li>
       {user?.uid ? (
         <>
           <li>

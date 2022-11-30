@@ -8,6 +8,7 @@ import { BiUser } from "react-icons/bi";
 import useAdmin from "../Hooks/useAdmin";
 import { AuthContext } from "../Context/AuthProvider";
 import useSeller from "../Hooks/useSeller";
+import { Toaster } from "react-hot-toast";
 
 const DashboardLayout = () => {
   const { user } = useContext(AuthContext);
@@ -86,6 +87,7 @@ const DashboardLayout = () => {
           </ul>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import Achievement from "../Achievement/Achievement";
 import Banner from "../Banner/Banner";
 import Categories from "../Category/Categories";
 
@@ -7,6 +8,7 @@ const Home = () => {
     <div>
       <Banner />
       <Categories />
+      <Achievement />
     </div>
   );
 };

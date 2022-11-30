@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 import Loading from "../Shared/Loading";
+import NotAvailable from "../Shared/NotAvailable";
 import AdsCard from "./AdsCard";
 
 const MyAds = () => {
@@ -32,9 +33,7 @@ const MyAds = () => {
   return (
     <div>
       <div className="sticky top-[-13px] bg-white">
-        <h2 className="text-2xl font-semibold mb-1">
-          Published ads {ads.length}
-        </h2>
+        <h2 className="text-2xl font-semibold mb-1">Published ads</h2>
         <hr />
         <label
           htmlFor="dashboard-drawer"
@@ -59,6 +58,13 @@ const MyAds = () => {
       <div className="w-[98%] my-5 grid grid-cols-1">
         {ads &&
           ads.map((ad) => <AdsCard key={ad._id} ad={ad} refetch={refetch} />)}
+        {ads.length === 0 && (
+          <NotAvailable>
+            <p className="text-5xl text-white font-semibold">
+              You didn't <span className="text-primary">post</span> any ads
+            </p>
+          </NotAvailable>
+        )}
       </div>
     </div>
   );

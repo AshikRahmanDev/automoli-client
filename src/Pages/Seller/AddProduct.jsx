@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider";
 
@@ -62,10 +62,11 @@ const AddProduct = () => {
             email: user?.email,
           };
           // save car ad in mongobd
-          fetch("http://localhost:5000/add-car-ad", {
+          fetch(`http://localhost:5000/add-car-ad?email=${user?.email}`, {
             method: "POST",
             headers: {
               "content-type": "application/json",
+              authorization: localStorage.getItem("automoliToken"),
             },
             body: JSON.stringify(ad),
           })
@@ -327,7 +328,6 @@ const AddProduct = () => {
           </button>
         </div>
       </form>
-      <Toaster />
     </div>
   );
 };

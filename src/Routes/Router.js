@@ -3,6 +3,7 @@ import DashboardLayout from "../Layout/DashboardLayout";
 import Root from "../Layout/Root";
 import AllBuyer from "../Pages/Admin/AllBuyer";
 import AllSeller from "../Pages/Admin/AllSeller";
+import Blog from "../Pages/Blog/Blog";
 import Cars from "../Pages/Cars/Cars";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/login", element: <Login /> },
+      { path: "/blog", element: <Blog /> },
       { path: "/register", element: <Register></Register> },
       {
         path: "/brand/cars/:brandName",
