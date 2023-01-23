@@ -17,7 +17,7 @@ const BookNowModal = ({ setBookItem, bookItem }) => {
       product: bookItem,
     };
     if (data.buyerMobile || data.buyerLocation) {
-      fetch("http://localhost:5000/addbooking", {
+      fetch("https://automoli-server-mohammdashik.vercel.app/addbooking", {
         method: "POST",
         headers: {
           "content-type": "application/json",

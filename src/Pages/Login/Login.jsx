@@ -49,7 +49,7 @@ const Login = () => {
         photo: userData.photoURL,
       };
       if (user) {
-        fetch("http://localhost:5000/adduser", {
+        fetch("https://automoli-server-mohammdashik.vercel.app/adduser", {
           method: "POST",
           headers: {
             "content-type": "application/json",

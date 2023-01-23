@@ -15,7 +15,7 @@ const MyAds = () => {
     queryKey: ["myads"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/myads/?email=${user?.email}`,
+        `https://automoli-server-mohammdashik.vercel.app/myads/?email=${user?.email}`,
         {
           headers: {
             authorization: localStorage.getItem("automoliToken"),

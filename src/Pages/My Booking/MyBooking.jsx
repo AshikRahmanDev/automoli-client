@@ -12,7 +12,7 @@ const MyBooking = () => {
     queryKey: ["mybooking"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/mybooking?email=${user?.email}`,
+        `https://automoli-server-mohammdashik.vercel.app/mybooking?email=${user?.email}`,
         {
           headers: {
             authorization: localStorage.getItem("automoliToken"),

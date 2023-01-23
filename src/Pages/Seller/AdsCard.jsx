@@ -16,7 +16,7 @@ const AdsCard = ({ ad, refetch }) => {
     location,
     _id,
   } = ad;
-  fetch(`http://localhost:5000/avertise/${_id}`)
+  fetch(`https://automoli-server-mohammdashik.vercel.app/avertise/${_id}`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
@@ -28,13 +28,16 @@ const AdsCard = ({ ad, refetch }) => {
     );
     if (conformation) {
       // delete seller add
-      fetch(`http://localhost:5000/ad/delete/?email=${user?.email}`, {
-        method: "DELETE",
-        headers: {
-          authorization: localStorage.getItem("automoliToken"),
-          productId: ad._id,
-        },
-      })
+      fetch(
+        `https://automoli-server-mohammdashik.vercel.app/ad/delete/?email=${user?.email}`,
+        {
+          method: "DELETE",
+          headers: {
+            authorization: localStorage.getItem("automoliToken"),
+            productId: ad._id,
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.acknowledged) {
@@ -65,7 +68,7 @@ const AdsCard = ({ ad, refetch }) => {
       location,
       itemId: _id,
     };
-    fetch(`http://localhost:5000/avertise/${_id}`)
+    fetch(`https://automoli-server-mohammdashik.vercel.app/avertise/${_id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
@@ -73,7 +76,7 @@ const AdsCard = ({ ad, refetch }) => {
       });
 
     if (advertise) {
-      fetch("http://localhost:5000/advertise", {
+      fetch("https://automoli-server-mohammdashik.vercel.app/advertise", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -85,7 +88,9 @@ const AdsCard = ({ ad, refetch }) => {
         .then((data) => {
           if (data.acknowledged) {
             toast.success("Successfully advertise!");
-            fetch(`http://localhost:5000/avertise/${_id}`)
+            fetch(
+              `https://automoli-server-mohammdashik.vercel.app/avertise/${_id}`
+            )
               .then((res) => res.json())
               .then((data) => {
                 console.log(data);

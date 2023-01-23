@@ -8,9 +8,12 @@ const Categories = () => {
   useEffect(() => {
     try {
       axios
-        .get("http://localhost:5000/brands", (res) => {
-          res.json();
-        })
+        .get(
+          "https://automoli-server-mohammdashik.vercel.app/brands",
+          (res) => {
+            res.json();
+          }
+        )
         .then((data) => setCategories(data.data));
     } catch (error) {
       console.error(error);

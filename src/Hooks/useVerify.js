@@ -4,9 +4,12 @@ const useVerify = (email) => {
   const [isVerified, setIsVerified] = useState("");
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:5000/verify/?email=${email}`, {
-        method: "PUT",
-      })
+      fetch(
+        `https://automoli-server-mohammdashik.vercel.app/verify/?email=${email}`,
+        {
+          method: "PUT",
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

@@ -13,14 +13,17 @@ const PaymentForm = ({ booking }) => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("http://localhost:5000/create-paymet-intent", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: localStorage.getItem("automoliToken"),
-      },
-      body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
-    })
+    fetch(
+      "https://automoli-server-mohammdashik.vercel.app/create-paymet-intent",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: localStorage.getItem("automoliToken"),
+        },
+        body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
   }, []);

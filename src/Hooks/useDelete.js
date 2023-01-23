@@ -6,13 +6,16 @@ const useDelete = (email) => {
   const [isDelete, setIsDelete] = useState("");
   useEffect(() => {
     if (email) {
-      fetch(`http://localhost:5000/delete/user/?email=${user?.email}`, {
-        method: "DELETE",
-        headers: {
-          email: email,
-          authorization: localStorage.getItem("automoliToken"),
-        },
-      })
+      fetch(
+        `https://automoli-server-mohammdashik.vercel.app/delete/user/?email=${user?.email}`,
+        {
+          method: "DELETE",
+          headers: {
+            email: email,
+            authorization: localStorage.getItem("automoliToken"),
+          },
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

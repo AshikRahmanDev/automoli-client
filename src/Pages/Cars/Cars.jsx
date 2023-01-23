@@ -11,7 +11,9 @@ const Cars = () => {
   const cars = useLoaderData();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/isUserVerified/?email=${user?.email}`)
+    fetch(
+      `https://automoli-server-mohammdashik.vercel.app/isUserVerified/?email=${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.verified) {

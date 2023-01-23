@@ -62,14 +62,17 @@ const AddProduct = () => {
             email: user?.email,
           };
           // save car ad in mongobd
-          fetch(`http://localhost:5000/add-car-ad?email=${user?.email}`, {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-              authorization: localStorage.getItem("automoliToken"),
-            },
-            body: JSON.stringify(ad),
-          })
+          fetch(
+            `https://automoli-server-mohammdashik.vercel.app/add-car-ad?email=${user?.email}`,
+            {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+                authorization: localStorage.getItem("automoliToken"),
+              },
+              body: JSON.stringify(ad),
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               if (data.acknowledged) {

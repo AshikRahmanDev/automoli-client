@@ -4,14 +4,15 @@ import AdvertiseCard from "./AdvertiseCard";
 const Advertise = () => {
   const [advertiseItem, setAvertiseItem] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/advertiseItem")
+    fetch("https://automoli-server-mohammdashik.vercel.app/advertiseItem")
       .then((res) => res.json())
       .then((data) => {
         setAvertiseItem(data);
       });
   }, []);
+
   return (
-    <>
+    <div>
       {advertiseItem !== 0 && (
         <div className="w-[95%] mx-auto bg-accent/10 p-4">
           <h2 className="text-xl font-bold">Best Deal</h2>
@@ -22,7 +23,7 @@ const Advertise = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

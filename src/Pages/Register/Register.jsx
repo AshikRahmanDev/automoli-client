@@ -66,13 +66,16 @@ const Register = () => {
                       role,
                       photo,
                     };
-                    fetch("http://localhost:5000/adduser", {
-                      method: "POST",
-                      headers: {
-                        "content-type": "application/json",
-                      },
-                      body: JSON.stringify(user),
-                    })
+                    fetch(
+                      "https://automoli-server-mohammdashik.vercel.app/adduser",
+                      {
+                        method: "POST",
+                        headers: {
+                          "content-type": "application/json",
+                        },
+                        body: JSON.stringify(user),
+                      }
+                    )
                       .then((res) => res.json())
                       .then((data) => {
                         console.log(data);

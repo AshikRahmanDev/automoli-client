@@ -29,7 +29,9 @@ export const router = createBrowserRouter([
       {
         path: "/brand/cars/:brandName",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/brand/cars/${params.brandName}`),
+          fetch(
+            `https://automoli-server-mohammdashik.vercel.app/brand/cars/${params.brandName}`
+          ),
         element: (
           <PrivetRoute>
             <Cars />
@@ -82,7 +84,9 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/payment/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/bookings/${params.id}`),
+          fetch(
+            `https://automoli-server-mohammdashik.vercel.app/bookings/${params.id}`
+          ),
         element: <Payment />,
       },
     ],

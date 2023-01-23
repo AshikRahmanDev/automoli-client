@@ -15,7 +15,7 @@ const AllBuyer = () => {
     queryKey: ["allbuyer"],
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/allbuyer/?email=${user.email}`,
+        `https://automoli-server-mohammdashik.vercel.app/allbuyer/?email=${user.email}`,
         {
           headers: {
             authorization: localStorage.getItem("automoliToken"),
